@@ -121,3 +121,5 @@ kubectl show the existing nodes:
 ```
 kubectl get nodes
 ```
+
+## Install OpenFaas
