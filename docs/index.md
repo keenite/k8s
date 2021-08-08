@@ -48,3 +48,24 @@ Add stable repo:
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+Install Docker Engine
+```
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+ sudo docker run hello-world
+```
+Configure the Docker daemon, in particular to use systemd for the management of the container’s cgroups.
+```
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+```
+
