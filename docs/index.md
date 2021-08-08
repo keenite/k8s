@@ -94,3 +94,17 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+
+## Add nodes to the cluster
+Control plan will show the command used to join the cluster. e.g.
+```
+kubeadm join 10.211.55.76:6443 --token m5jelv.em1up9uyjv23jgrp \
+        --discovery-token-ca-cert-hash sha256:dca9f19584c9af036edc7d6256d221b8b7c3a1332d69c2d6227e833f566b461a
+```
+
+Control Plan need to make kubectl work for your non-root user, run these commands, which are also part of the kubeadm init output:
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
