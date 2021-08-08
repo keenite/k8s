@@ -68,4 +68,9 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 ```
-
+Restart Docker and enable on boot:
+```
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
