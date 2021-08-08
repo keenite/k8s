@@ -161,3 +161,13 @@ PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-a
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 faas-cli list
 ```
+Deploy functions and OpenFaas Web UI
+```
+faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
+http://10.211.55.76:31112/ui/
+```
+Show installed functions and invoke:
+```
+faas-cli list --verbose
+echo Hi | faas-cli invoke markdown
+```
