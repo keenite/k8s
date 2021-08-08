@@ -95,6 +95,10 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
+```
+kubeadm init --pod-network-cidr=10.244.0.0/16
+```
+
 ## Add nodes to the cluster
 Control plan will show the command used to join the cluster. e.g.
 ```
