@@ -128,3 +128,36 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/a
 ```
 
 ## Install OpenFaas
+Install faas-cli
+```
+curl -sLSf https://cli.openfaas.com | sudo sh
+```
+Login Docker
+```
+docker login
+```
+Install arkada and openfaas
+```
+curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+arkade install openfaas --load-balancer (arkade install openfaas)
+```
+Rollout gateway
+```
+kubectl rollout status -n openfaas deploy/gateway
+kubectl port-forward svc/gateway -n openfaas 8080:8080
+```
+Get external-ip
+```
+kubectl get svc -o wide gateway-external -n openfaas
+```
+Login openfaas
+```
+export OPENFAAS_URL="" # Populate as above
+
+# This command retrieves your password
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+
+# This command logs in and saves a file to ~/.openfaas/config.yml
+echo -n $PASSWORD | faas-cli login --username admin --password-stdin
+faas-cli list
+```
