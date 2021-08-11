@@ -171,3 +171,10 @@ Show installed functions and invoke:
 faas-cli list --verbose
 echo Hi | faas-cli invoke markdown
 ```
+
+# OpenFass
+Build normal yml file but got error **Temporary failure resolving 'deb.debian.org'**
+Need to change the mode for resolv file.
+```
+sudo chmod o+r /etc/resolv.conf
+```
