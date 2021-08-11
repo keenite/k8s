@@ -176,5 +176,7 @@ echo Hi | faas-cli invoke markdown
 Build normal yml file but got error **Temporary failure resolving 'deb.debian.org'**
 Need to change the mode for resolv file.
 ```
+sudo service docker restart
+(May need to run)
 sudo chmod o+r /etc/resolv.conf
 ```
