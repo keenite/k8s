@@ -54,6 +54,20 @@ Install Docker Engine
  sudo apt-get install docker-ce docker-ce-cli containerd.io
  sudo docker run hello-world
 ```
+
+### Rootless mode
+Must install uidmap and has at least 65536 subordinate UIDs/GIDs for the user.
+```
+sudo apt-get install uidmap
+grep ^$(whoami): /etc/subuid
+grep ^$(whoami): /etc/subgid
+```
+Then run the script after docker installed:
+```
+dockerd-rootless-setuptool.sh install
+```
+Add the installed output env to ~/.bashrc
+
 Configure the Docker daemon, in particular to use systemd for the management of the container’s cgroups.
 ```
 sudo mkdir /etc/docker
