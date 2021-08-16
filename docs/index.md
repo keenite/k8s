@@ -41,6 +41,16 @@ Then run the script after docker installed:
 ```
 dockerd-rootless-setuptool.sh install
 ```
+
+```
+sudo sh -eux <<EOF
+# Add subuid entry for wenji
+echo "wenji:100000:65536" >> /etc/subuid
+# Add subgid entry for wenji
+echo "wenji:100000:65536" >> /etc/subgid
+EOF
+```
+
 Add the installed output env to ~/.bashrc
 
 Configure the Docker daemon, in particular to use systemd for the management of the container’s cgroups.
