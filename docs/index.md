@@ -1,3 +1,15 @@
+- [Install kubeadm and setup a cluster](#install-kubeadm-and-setup-a-cluster)
+  * [Install Docker as Container Runtime](#install-docker-as-container-runtime)
+    + [Rootless mode](#rootless-mode)
+  * [Install Kubenetes](#install-kubenetes)
+  * [Add nodes to the cluster](#add-nodes-to-the-cluster)
+  * [Install DashBoard](#install-dashboard)
+  * [Install OpenFaas](#install-openfaas)
+  * [Preinstall steps](#preinstall-steps)
+- [OpenFass](#openfass)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # Install kubeadm and setup a cluster
 
 ## Install Docker as Container Runtime
@@ -171,6 +183,25 @@ Show dashboard
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
 ```
 
+## Install DashBoard
+Edit kubernetes-dashboard service.
+```
+kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
+```
+You should see yaml representation of the service. Change type: ClusterIP to type: NodePort and save file. If it's already changed go to next step.
+Next we need to check port on which Dashboard was exposed.
+```
+kubectl -n kubernetes-dashboard get service kubernetes-dashboard
+```
+The output is similar to this:
+```
+NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes-dashboard   NodePort   10.100.124.90   <nodes>       443:31707/TCP   21h
+```
+Dashboard has been exposed on port 31707 (HTTPS). Now you can access it from your browser at: ```https://<master-ip>:31707```. master-ip can be found by executing kubectl cluster-info. Usually it is either 127.0.0.1 or IP of your machine, assuming that your cluster is running directly on the machine, on which these commands are executed.
+
+In case you are trying to expose Dashboard using NodePort on a multi-node cluster, then you have to find out IP of the node on which Dashboard is running to access it. Instead of accessing ```https://<master-ip>:<nodePort>``` you should access ```https://<node-ip>:<nodePort>.```
+ 
 ## Install OpenFaas
 ## Preinstall steps
 
