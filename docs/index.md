@@ -201,6 +201,8 @@ kubernetes-dashboard   NodePort   10.100.124.90   <nodes>       443:31707/TCP   
 Dashboard has been exposed on port 31707 (HTTPS). Now you can access it from your browser at: ```https://<master-ip>:31707```. master-ip can be found by executing kubectl cluster-info. Usually it is either 127.0.0.1 or IP of your machine, assuming that your cluster is running directly on the machine, on which these commands are executed.
 
 In case you are trying to expose Dashboard using NodePort on a multi-node cluster, then you have to find out IP of the node on which Dashboard is running to access it. Instead of accessing ```https://<master-ip>:<nodePort>``` you should access ```https://<node-ip>:<nodePort>.```
+
+Create a user as https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md and paste token in authentication.
  
 ## Install OpenFaas
 ## Preinstall steps
