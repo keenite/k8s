@@ -68,6 +68,13 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 EOF
 ```
 
+Restart Docker and enable on boot:
+```
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
 ## Preinstall steps
 [link](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 Turn the swap partition off
@@ -92,14 +99,6 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
-```
-
-
-Restart Docker and enable on boot:
-```
-sudo systemctl enable docker
-sudo systemctl daemon-reload
-sudo systemctl restart docker
 ```
 ## Install Kubenetes
 Update the apt package index and install packages needed to use the Kubernetes apt repository:
