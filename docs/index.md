@@ -121,6 +121,24 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
+Configure the Docker daemon, in particular to use systemd for the management of the container’s cgroups.
+
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+Restart Docker and enable on boot:
+
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 ```
 kubeadm reset
 kubeadm init --pod-network-cidr=10.244.0.0/16
