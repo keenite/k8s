@@ -202,7 +202,8 @@ Dashboard has been exposed on port 31707 (HTTPS). Now you can access it from you
 
 In case you are trying to expose Dashboard using NodePort on a multi-node cluster, then you have to find out IP of the node on which Dashboard is running to access it. Instead of accessing ```https://<master-ip>:<nodePort>``` you should access ```https://<node-ip>:<nodePort>.```
 
-Create a user as https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md and paste token in authentication.
+Create a user as [link](https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md and paste token) in authentication.
+Get access token [link](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#getting-a-bearer-token)
  
 ## Install OpenFaas
 ## Preinstall steps
