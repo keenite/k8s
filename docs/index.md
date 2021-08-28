@@ -278,3 +278,9 @@ sudo service docker restart
 (May need to run)
 sudo chmod o+r /etc/resolv.conf
 ```
+## Delete a function
+```
+faas-cli delete <function name>
+```
+
+# Kubenetes Maintaince
