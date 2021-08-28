@@ -216,10 +216,28 @@ Login Docker
 ```
 docker login
 ```
+
+### install openfaas with arkada
 Install arkada and openfaas
 ```
 curl -SLsf https://dl.get-arkade.dev/ | sudo sh
 arkade install openfaas --load-balancer (arkade install openfaas)
+```
+
+### install openfaas with Helm
+```
+# Get Helm
+curl -sSLf https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+# Add namespaces
+kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+# Install openfaas
+helm repo add openfaas https://openfaas.github.io/faas-netes/
+# Deploy helm chart from helm char repo
+helm repo update \
+ && helm upgrade openfaas --install openfaas/openfaas \
+    --namespace openfaas  \
+    --set functionNamespace=openfaas-fn \
+    --set generateBasicAuth=true
 ```
 Rollout gateway
 ```
